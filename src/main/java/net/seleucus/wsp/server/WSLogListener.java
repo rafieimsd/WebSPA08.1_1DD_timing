@@ -80,8 +80,8 @@ public class WSLogListener extends TailerListenerAdapter {
             final int userID[] = myDatabase.users.getUSIDFromRequest(webSpaRequest);
             afterSearchInDBNanoS = System.nanoTime();
             afterSearchInDBMiliS = System.currentTimeMillis();
-            LOGGER.info("Database Check Pass time(nano second): " + String.valueOf(afterSearchInDBNanoS - beforeSearchInDBNanoS));
-            LOGGER.info("Database Check Pass time(nano second): " + String.valueOf(afterSearchInDBMiliS - beforeSearchInDBMiliS));
+            LOGGER.info("Database Check Pass time(Nano second): " + String.valueOf(afterSearchInDBNanoS - beforeSearchInDBNanoS));
+            LOGGER.info("Database Check Pass time(Mili second): " + String.valueOf(afterSearchInDBMiliS - beforeSearchInDBMiliS));
             if (userID[0] != -1) {
 //                beforeSendToCheckerTime = System.currentTimeMillis();
                 boolean isValidUser = sendRequestToChecker(userID);
