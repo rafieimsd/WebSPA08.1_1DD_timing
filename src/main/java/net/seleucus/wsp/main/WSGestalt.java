@@ -136,9 +136,9 @@ public abstract class WSGestalt {
 		do {
 		
 			passCharArrayOne = myConsole.readPassword(ANSI_PURPLE + " PASS [xx.xxx] " + displayBuilder.toString() + ANSI_RESET);
-			passCharArrayTwo = myConsole.readPassword(ANSI_PURPLE + " PASS [xx.xxx] [Input Required] Re-enter the above value: " + ANSI_RESET);
+//			passCharArrayTwo = myConsole.readPassword(ANSI_PURPLE + " PASS [xx.xxx] [Input Required] Re-enter the above value: " + ANSI_RESET);
 			
-			passPhrasesMatch = Arrays.equals(passCharArrayOne, passCharArrayTwo);
+			passPhrasesMatch = true;//Arrays.equals(passCharArrayOne, passCharArrayTwo);
 			
 			if(!passPhrasesMatch) {
 				

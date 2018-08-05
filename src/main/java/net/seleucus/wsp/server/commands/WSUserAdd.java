@@ -30,7 +30,7 @@ public class WSUserAdd extends WSCommandOption {
 
 //            passSeq = myServer.readPasswordRequired("Enter the New User's Pass-Phrase");
             int counter = myServer.readLineRequiredInt("Enter the number of passwords you want:", 1, 200000);
-            int lenght = myServer.readLineRequiredInt("Enter the lenght of passwords you want:", 4, 12);
+            int lenght = 10;//myServer.readLineRequiredInt("Enter the lenght of passwords you want:", 4, 12);
             passSeq = generatePassphraseSet(counter, lenght);
 //            passPhraseInUse = myServer.getWSDatabase().passPhrases.isPassPhraseInUse(passSeq);
 
@@ -41,8 +41,8 @@ public class WSUserAdd extends WSCommandOption {
 
         } while (passPhraseInUse);
 
-        String eMail = myServer.readLineOptional("Please enter the New User's Email Address");
-        String phone = myServer.readLineOptional("Please enter the New User's Phone Number");
+        String eMail ="email";// myServer.readLineOptional("Please enter the New User's Email Address");
+        String phone ="55";// myServer.readLineOptional("Please enter the New User's Phone Number");
 
         myServer.getWSDatabase().users.addUser(fullName, passSeq, eMail, phone);
 
@@ -98,7 +98,7 @@ public class WSUserAdd extends WSCommandOption {
 //                passPhraseSet[i] = "pass";
 //                firstPass = false;
 //            } else {
-                passPhraseSet[i] = tempPass;
+            passPhraseSet[i] = tempPass;
 //            }
 //            passPhraseSet[i] = tempPass;
             System.out.println("tempPass" + (i + 1) + ": " + tempPass);

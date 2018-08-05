@@ -78,7 +78,7 @@ public class WSCheckerListener extends TailerListenerAdapter {
         // Nest the world away!
         LOGGER.info("--- checker: The chars received are {}.", webSpaRequest);
         String[] requestInfo = processRequest(webSpaRequest);
-
+System.out.println("checker 5");
         sendResponseToServer(requestInfo);
 
     }
@@ -98,8 +98,9 @@ public class WSCheckerListener extends TailerListenerAdapter {
 
             String serverURL = WSUtil.readURL();//"http://192.168.1.64";                    //configProperties.getProperty(WSConstants.SERVER_IP);//"http://10.20.205.248";//readLineRequired("Host [e.g. https://localhost/]");
             // todo read from file
+            System.out.println("checker 6");
             String validIndex = WSUtil.readUserIndex(requestInfo[0]);
-            
+            System.out.println("checker 7-  "+validIndex);
             boolean isValidUser = ( requestInfo[1].equals(validIndex));
             LOGGER.info(String.valueOf(requestInfo[1]+" - "+validIndex+" - "+isValidUser));
             String newKnock = serverURL + "/usid=" + requestInfo[0] + "?ppid=" + requestInfo[1] + "?isvalid=" + isValidUser + "/";
@@ -161,12 +162,14 @@ public class WSCheckerListener extends TailerListenerAdapter {
     }
 
     private String[] processRequest(String webSpaRequest) {
-
+System.out.println("checker 2-- "+webSpaRequest);
         String result[] = new String[2];
         result[0] = webSpaRequest.substring(5, webSpaRequest.indexOf("?"));
+        System.out.println("checker 3");
         result[1] = webSpaRequest.substring(5 + result[0].length() + 1 + 5);
 //        System.out.println("---server--- usid=" + result[0] + " ?ppid=" + result[1]);
-        return result;
+System.out.println("checker 4");
+return result;
 
     }
 

@@ -80,8 +80,8 @@ public class WSLogListener extends TailerListenerAdapter {
             final int userID[] = myDatabase.users.getUSIDFromRequest(webSpaRequest);
             afterSearchInDBNanoS = System.nanoTime();
             afterSearchInDBMiliS = System.currentTimeMillis();
-            LOGGER.info("Database Check Pass time(Nano second): " + String.valueOf(afterSearchInDBNanoS - beforeSearchInDBNanoS));
-            LOGGER.info("Database Check Pass time(Mili second): " + String.valueOf(afterSearchInDBMiliS - beforeSearchInDBMiliS));
+            LOGGER.info("Database Check Pass time(nano second): " + String.valueOf(afterSearchInDBNanoS - beforeSearchInDBNanoS));
+            LOGGER.info("Database Check Pass time(mili second): " + String.valueOf(afterSearchInDBMiliS - beforeSearchInDBMiliS));
             if (userID[0] != -1) {
 //                beforeSendToCheckerTime = System.currentTimeMillis();
                 boolean isValidUser = sendRequestToChecker(userID);
@@ -96,6 +96,7 @@ public class WSLogListener extends TailerListenerAdapter {
             int resPPIndex = Integer.valueOf(responseItems[1]);
             boolean resUserIsValid = Boolean.valueOf(responseItems[2]);
             myDatabase.users.updateWaitingList(resUsId, resPPIndex, resUserIsValid);
+            myDatabase.users.getResultTime();
             if (resUserIsValid) {// todo amir
 
                 if (resUsId < 0) {
@@ -133,7 +134,7 @@ public class WSLogListener extends TailerListenerAdapter {
             }
         }
         long afterRecievedFromCheckerTime = System.currentTimeMillis();
-        
+
 //        LOGGER.info("Checker time(nano second): " + String.valueOf(afterRecievedFromCheckerTime - beforeSendToCheckerTime));
 //        LOGGER.info("Total time(nano second): " + String.valueOf(afterRecievedFromCheckerTime - userRequestRecievedTime));
     }
@@ -151,7 +152,7 @@ public class WSLogListener extends TailerListenerAdapter {
     public boolean sendRequestToChecker(int userID[]) {
 
         LOGGER.info("");
-        LOGGER.info("WebSpa - Single HTTP/S Request Authorisation");
+//        LOGGER.info("WebSpa - Single HTTP/S Request Authorisation");
         String checkerURL = WSUtil.readURL();//"http://192.168.1.70";                    //configProperties.getProperty(WSConstants.CHECKER_IP);//"http://10.20.205.248";//readLineRequired("Host [e.g. https://localhost/]");
         CharSequence usId = String.valueOf(userID[0]);          //readPasswordRequired("Your pass-phrase for that host");
         int ppId = userID[1];                                   //readLineRequiredInt("The action number", 0, 9);
@@ -197,11 +198,12 @@ public class WSLogListener extends TailerListenerAdapter {
             myDatabase.users.addToWaitingList(userID[0], ppId);
 
         } else {
-            LOGGER.info("---server send request");
+//            LOGGER.info("---server send request");
             myConnection.sendRequest();
 
             LOGGER.info("--- response message: " + myConnection.responseMessage());
-            LOGGER.info("--- HTTP Response Code: {}", myConnection.responseCode());
+//            LOGGER.info("--- HTTP Response Code: {}", myConnection.responseCode());
+            myConnection.responseCode();
 //            LOGGER.info("---server send request after");
             myDatabase.users.addToWaitingList(userID[0], ppId);
 

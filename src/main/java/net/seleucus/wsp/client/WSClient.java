@@ -29,9 +29,9 @@ public class WSClient extends WSGestalt {
 		LOGGER.info("version " + WSVersion.getValue() + " (webspa@seleucus.net)"); 		
 		LOGGER.info("");
 
-		String host = readLineRequired("Host [e.g. https://localhost/]");
+		String host = WSUtil.readURL();//"http://192.168.1.69";//readLineRequired("Host [e.g. https://localhost/]");
 		CharSequence password = readPasswordRequired("Your pass-phrase for that host");
-		int action = readLineRequiredInt("The action number", 0, 9);
+		int action =1;// readLineRequiredInt("The action number", 0, 9);
 		
 		WSRequestBuilder myClient = new WSRequestBuilder(host, password, action);
 		String knock = myClient.getKnock();
